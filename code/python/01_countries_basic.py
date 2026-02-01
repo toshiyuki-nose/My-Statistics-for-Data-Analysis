@@ -1,13 +1,11 @@
+## 01_countries_basic.py
 from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
 # データ読み込み
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_PATH = BASE_DIR / "data" / "01_countries_basic.csv"
-
+DATA_PATH = Path("data/01_countries_basic.csv")
 df = pd.read_csv(DATA_PATH)
-
 
 # -----------------------
 # 散布図① 人口 × GDP
