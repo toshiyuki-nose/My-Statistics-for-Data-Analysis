@@ -1,5 +1,8 @@
+## 01_countries_basic.R
+
+
 # データ読み込み
-df <- read.csv("01_countries_basic.csv")
+df <- read.csv("data/01_countries_basic.csv")
 
 # -----------------------
 # 散布図① 人口 × GDP
@@ -40,3 +43,4 @@ region_mean <- aggregate(
 
 print("Average by Region")
 print(region_mean)
+
