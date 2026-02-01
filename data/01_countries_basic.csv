@@ -1,0 +1,9 @@
+country,population_million,gdp_billion_usd,area_thousand_km2,average_age,region
+Country_A,50,1200,800,42,Region_1
+Country_B,120,900,1500,35,Region_2
+Country_C,30,600,400,46,Region_1
+Country_D,200,1800,3000,33,Region_3
+Country_E,80,1500,900,41,Region_2
+Country_F,15,300,200,48,Region_1
+Country_G,95,1100,1200,38,Region_3
+Country_H,60,700,500,44,Region_2
