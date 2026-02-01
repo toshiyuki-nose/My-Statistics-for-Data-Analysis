@@ -1,5 +1,5 @@
 ## 01_countries_basic.R
-
+# データの読みこみと基本的な可視化・相関係数の計算
 
 # データ読み込み
 df <- read.csv("data/01_countries_basic.csv")

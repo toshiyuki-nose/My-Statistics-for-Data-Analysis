@@ -1,0 +1,17 @@
+country,region,population_million,gdp_per_capita_usd,life_expectancy,average_age
+Country_A,Region_1,5,32000,82,44
+Country_B,Region_1,18,28000,80,42
+Country_C,Region_1,42,35000,83,45
+Country_D,Region_1,9,26000,79,41
+Country_E,Region_2,65,12000,74,36
+Country_F,Region_2,110,9000,71,34
+Country_G,Region_2,38,15000,76,37
+Country_H,Region_2,22,18000,77,38
+Country_I,Region_3,3,55000,84,46
+Country_J,Region_3,7,62000,85,47
+Country_K,Region_3,1.5,70000,86,48
+Country_L,Region_3,12,48000,83,45
+Country_M,Region_4,140,6000,69,32
+Country_N,Region_4,95,7500,70,33
+Country_O,Region_4,60,8200,72,35
+Country_P,Region_4,210,5000,68,31

@@ -1,4 +1,6 @@
 ## 01_countries_basic.py
+from config import DATA_DIR
+
 from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
