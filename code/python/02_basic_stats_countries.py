@@ -1,14 +1,23 @@
-## 02_basic_stats_countries.py
+# 02_basic_stats_countries.py
 # Basic statistics for countries dataset
 
-from config import DATA_DIR
+import sys
+from pathlib import Path
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# ===== Path (fixed) =====
+# ===== Project root (fixed) =====
+PROJECT_ROOT = Path(r"E:\Analytics\My-Statistics-for-Data-Analysis")
+
+# config.py を import できるように、プロジェクトルートを sys.path に追加
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
+from config import DATA_DIR  # noqa: E402
+
 # ===== Load =====
 df = pd.read_csv(DATA_DIR / "02_countries_basic_stats.csv")
-
 
 # ===== Basic check =====
 print("== Head ==")
@@ -23,12 +32,11 @@ numeric_cols = ["population_million", "gdp_per_capita_usd", "life_expectancy", "
 print("== Basic statistics (describe) ==")
 print(df[numeric_cols].describe(), "\n")
 
-# Mean / Median / Var / Std
 stats = pd.DataFrame({
     "mean": df[numeric_cols].mean(),
     "median": df[numeric_cols].median(),
-    "var": df[numeric_cols].var(ddof=1),   # sample variance
-    "std": df[numeric_cols].std(ddof=1),   # sample std
+    "var": df[numeric_cols].var(ddof=1),
+    "std": df[numeric_cols].std(ddof=1),
     "min": df[numeric_cols].min(),
     "max": df[numeric_cols].max()
 })
@@ -50,10 +58,9 @@ for col in numeric_cols:
     plt.show()
 
 # ===== Plots: Boxplot by region =====
+regions = sorted(df["region"].unique())
 for col in numeric_cols:
     plt.figure()
-    # region order to keep stable
-    regions = sorted(df["region"].unique())
     data = [df.loc[df["region"] == r, col].dropna() for r in regions]
     plt.boxplot(data, labels=regions)
     plt.title(f"Boxplot by region: {col}")
