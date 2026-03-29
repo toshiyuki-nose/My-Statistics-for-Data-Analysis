@@ -1,0 +1,15 @@
+# R関連のファイルを無視
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Jupyter Notebookのチェックポイントファイル
+.ipynb_checkpoints/
+
+# Pythonの仮想環境
+venv/
+
+# VSCodeの設定ファイル
+.vscode/
+

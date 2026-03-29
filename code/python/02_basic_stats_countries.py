@@ -1,62 +1,55 @@
 ## 02_basic_stats_countries.py
 # Basic statistics for countries dataset
 
-from config import DATA_DIR
+from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# ===== Path (fixed) =====
-# ===== Load =====
-df = pd.read_csv(DATA_DIR / "02_countries_basic_stats.csv")
+# データ読み込み
+# プロジェクトルートを明示的に固定
+PROJECT_ROOT = Path(r"E:\Analytics\My-Statistics-for-Data-Analysis")
+DATA_PATH = PROJECT_ROOT / "data" / "02_countries_basic_stats.csv"
+df = pd.read_csv(DATA_PATH)
 
 
-# ===== Basic check =====
-print("== Head ==")
-print(df.head(), "\n")
+# データの確認
+print(df.head())
+print(df.info())
+print(df.describe())
 
-print("== dtypes ==")
-print(df.dtypes, "\n")
 
-# ===== Basic statistics (overall) =====
-numeric_cols = ["population_million", "gdp_per_capita_usd", "life_expectancy", "average_age"]
 
-print("== Basic statistics (describe) ==")
-print(df[numeric_cols].describe(), "\n")
+# 基本統計量の計算
+# 平均（mean）
+mean_values = df.mean(numeric_only=True)
+# 中央値（median）
+median_values = df.median(numeric_only=True)
+# 四分位数（quartiles）
+quartiles = df.quantile([0.25, 0.5, 0.75], numeric_only=True)
 
-# Mean / Median / Var / Std
-stats = pd.DataFrame({
-    "mean": df[numeric_cols].mean(),
-    "median": df[numeric_cols].median(),
-    "var": df[numeric_cols].var(ddof=1),   # sample variance
-    "std": df[numeric_cols].std(ddof=1),   # sample std
-    "min": df[numeric_cols].min(),
-    "max": df[numeric_cols].max()
-})
-print("== Mean/Median/Var/Std/Min/Max ==")
-print(stats, "\n")
+# ばらつきの指標
+# 分散（variance）
+variance_values = df.var(numeric_only=True, ddof=1)  # 標本分散
+# 標準偏差（standard deviation）
+std_values = df.std(numeric_only=True, ddof=1)  # 標本標準偏差
+# 最小値（min）
+min_values = df.min(numeric_only=True)
+# 最大値（max）
+max_values = df.max(numeric_only=True)
 
-# ===== By region =====
-region_stats = df.groupby("region")[numeric_cols].agg(["mean", "median", "var", "std", "min", "max"])
-print("== By region (mean/median/var/std/min/max) ==")
-print(region_stats, "\n")
 
-# ===== Plots: Histogram =====
-for col in numeric_cols:
-    plt.figure()
-    plt.hist(df[col].dropna())
-    plt.title(f"Histogram: {col}")
-    plt.xlabel(col)
-    plt.ylabel("Count")
-    plt.show()
 
-# ===== Plots: Boxplot by region =====
-for col in numeric_cols:
-    plt.figure()
-    # region order to keep stable
-    regions = sorted(df["region"].unique())
-    data = [df.loc[df["region"] == r, col].dropna() for r in regions]
-    plt.boxplot(data, labels=regions)
-    plt.title(f"Boxplot by region: {col}")
-    plt.xlabel("Region")
-    plt.ylabel(col)
-    plt.show()
+# 可視化
+# ヒストグラムの作成
+df["population_million"].hist(bins=10, edgecolor="black")
+plt.title("Population Distribution")
+plt.xlabel("Population (million)")
+plt.ylabel("Frequency")
+plt.show()
+
+
+# 箱ひげ図の作成
+df.boxplot(column="gdp_per_capita_usd")
+plt.title("GDP Distribution")
+plt.ylabel("GDP (per capita, USD)")
+plt.show()
